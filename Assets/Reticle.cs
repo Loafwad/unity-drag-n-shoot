@@ -11,7 +11,6 @@ public class Reticle : MonoBehaviour
 
     [Header("Drag Settings")]
     [SerializeField] private float amplitude;
-    [SerializeField] private float spaceBetween;
 
     [Header("Spring")]
 
@@ -46,6 +45,23 @@ public class Reticle : MonoBehaviour
 
     void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
     {
+        int flipped = 0;
+        if (point.flip)
+            flipped = -1;
+        else
+            flipped = 1;
+
+        Vector3 startPos = pointStartPos[i];
+        float pointIdentiy = startPos.x * (i + distance);
+        pointIdentiy = pointIdentiy * flipped;
+
+        Vector3 newPos = (mousePosRelative * pointIdentiy) / (distance * (distance * amplitude));
+        newPos = newPos * flipped;
+
+        float lerpTime = (selectAnimTime * pointIdentiy) * Time.deltaTime;
+        Vector3 lerpPos = Vector3.Lerp(point.transform.localPosition, newPos, lerpTime);
+        lerpPos.z = 0;
+        point.transform.localPosition = lerpPos;
 
     }
 

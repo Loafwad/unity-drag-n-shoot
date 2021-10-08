@@ -491,7 +491,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.347
+      value: -0.346
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.023
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99990225
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.013984343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.603
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877816, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: m_RootOrder
@@ -539,11 +563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: amplitude
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: stiffness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: spaceBetween
@@ -551,11 +575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: selectAnimTime
-      value: 2555
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: deselectAnimTime
-      value: 2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.size
@@ -591,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.data[1].inSlope
-      value: 1.8375008
+      value: -2.4888952
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.data[0].outSlope
@@ -599,11 +623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.data[1].inWeight
-      value: 0.06839198
+      value: 0.06346977
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.data[1].outSlope
-      value: 1.8375008
+      value: -2.4888952
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.data[0].outWeight
@@ -631,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8840413499324541632, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.377
+      value: -0.63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
@@ -810,16 +834,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
+      propertyPath: weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
+      propertyPath: amplitude
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
       propertyPath: stiffness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
       propertyPath: spaceBetween
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
       propertyPath: selectAnimTime
-      value: 25
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 1216857085118924881, guid: b520b39bb11533c4f971cb215e9933cd, type: 3}
       propertyPath: deselectAnimTime
