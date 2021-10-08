@@ -18,9 +18,16 @@ public class Reticle : MonoBehaviour
     [SerializeField]
     private float stiffness;
     [SerializeField] private List<GameObject> points = new List<GameObject>();
-
+    [SerializeField] private List<Vector3> pointStartPos = new List<Vector3>();
     private GameObject selectedObject;
 
+    private void Awake()
+    {
+        foreach (GameObject point in points)
+        {
+            pointStartPos.Add(point.transform.localPosition);
+        }
+    }
     private void Update()
     {
         if (selectedObject != null)
@@ -36,20 +43,12 @@ public class Reticle : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         item.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-    private int HandlePoint(int type, float distance, Vector3 mousePosRelative, Point point, int i, int flipped)
-    {
-        type++;
-        Vector3 newPos = (((mousePosRelative * type * flipped)) / (distance * amplitude));
-        float lerpTime = (selectAnimTime / type) * Time.deltaTime;
-        Vector3 lerpPos = Vector3.Lerp(points[i].transform.localPosition, -newPos * spaceBetween, lerpTime);
-        lerpPos.z = 0;
-        if (point.rigid)
-            points[i].transform.localPosition = -newPos * spaceBetween;
-        else
-            points[i].transform.localPosition = lerpPos;
 
-        return type;
+    void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
+    {
+
     }
+
     public void Selected(GameObject selected)
     {
         this.gameObject.SetActive(true);
@@ -58,28 +57,18 @@ public class Reticle : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3 mousePosRelative = mouseWorldPos - this.transform.position;
-        int fronts = 0;
-        int backs = 0;
         for (int i = 0; i < points.Count; i++)
         {
             HandleRotation(points[i].gameObject);
             float distance = Vector3.Distance(this.transform.position, mouseWorldPos);
             Point point = points[i].GetComponent<Point>();
-            if (point.flip)
-            {
-                fronts = HandlePoint(fronts, distance, mousePosRelative, point, i, 1);
-            }
-            else
-            {
-                backs = HandlePoint(backs, distance, mousePosRelative, point, i, -1);
-            }
+            HandlePoint(mousePosRelative, distance, i, point);
         }
     }
 
     public void Deselect()
     {
         selectedObject = null;
-        Debug.Log("released");
         for (int i = 0; i < points.Count; i++)
         {
             StartCoroutine(LerpObject(points[i], Vector3.zero, deselectAnimTime));

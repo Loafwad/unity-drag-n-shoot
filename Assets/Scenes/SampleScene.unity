@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018259301075, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.541
+      value: -0.347
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877816, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: m_RootOrder
@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: amplitude
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: stiffness
@@ -550,8 +550,12 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: selectAnimTime
+      value: 2555
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: deselectAnimTime
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8128090018628877817, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: animCurve.m_Curve.Array.size
@@ -624,6 +628,10 @@ PrefabInstance:
     - target: {fileID: 8442567774584195957, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
       propertyPath: flip
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840413499324541632, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.377
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ce24969b0abf24d92fe21626d59f82, type: 3}
