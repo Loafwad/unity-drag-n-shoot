@@ -13,11 +13,11 @@ public class Reticle : MonoBehaviour
     [SerializeField] private float amplitude;
 
     [Header("Spring")]
+    [SerializeField] private float stiffness;
 
-    [SerializeField]
-    private float stiffness;
+    [Header("Points")]
     [SerializeField] private List<GameObject> points = new List<GameObject>();
-    [SerializeField] private List<Vector3> pointStartPos = new List<Vector3>();
+    private List<Vector3> pointStartPos = new List<Vector3>();
     private GameObject selectedObject;
 
     private void Awake()
@@ -43,7 +43,7 @@ public class Reticle : MonoBehaviour
         item.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
+    private void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
     {
         int flipped = 0;
         if (point.flip)
@@ -52,13 +52,12 @@ public class Reticle : MonoBehaviour
             flipped = 1;
 
         Vector3 startPos = pointStartPos[i];
-        float pointIdentiy = startPos.x * (i + distance);
-        pointIdentiy = pointIdentiy * flipped;
+        float magnitude = distance * (distance * amplitude);
 
-        Vector3 newPos = (mousePosRelative * pointIdentiy) / (distance * (distance * amplitude));
-        newPos = newPos * flipped;
+        float pointIdentiy = (startPos.x * distance) * flipped;
+        Vector3 newPos = ((mousePosRelative * pointIdentiy) / magnitude) * flipped;
 
-        float lerpTime = (selectAnimTime * pointIdentiy) * Time.deltaTime;
+        float lerpTime = (selectAnimTime / pointIdentiy) * Time.deltaTime;
         Vector3 lerpPos = Vector3.Lerp(point.transform.localPosition, newPos, lerpTime);
         lerpPos.z = 0;
         point.transform.localPosition = lerpPos;

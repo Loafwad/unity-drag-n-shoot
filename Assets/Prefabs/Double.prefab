@@ -361,12 +361,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -1.7618906
+      outSlope: -1.7618906
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.09287515
     - serializedVersion: 3
       time: 1
       value: 1
@@ -380,9 +380,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   selectAnimTime: 25
-  deselectAnimTime: 15
+  deselectAnimTime: 2
   amplitude: 3
-  spaceBetween: 2.5
+  stiffness: 0.5
   points:
   - {fileID: 666335692018491586}
   - {fileID: 8787519058843457885}
