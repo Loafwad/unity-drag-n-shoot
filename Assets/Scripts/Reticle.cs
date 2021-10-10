@@ -17,6 +17,8 @@ public class Reticle : MonoBehaviour
 
     [Header("Points")]
     [SerializeField] private List<GameObject> points = new List<GameObject>();
+
+    [SerializeField] private List<GameObject> launchPoints = new List<GameObject>();
     private List<Vector3> pointStartPos = new List<Vector3>();
     private GameObject selectedObject;
 
@@ -45,17 +47,17 @@ public class Reticle : MonoBehaviour
 
     private void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
     {
-        int flipped = 0;
+        int direction = 0;
         if (point.flip)
-            flipped = -1;
+            direction = -1;
         else
-            flipped = 1;
+            direction = 1;
 
         Vector3 startPos = pointStartPos[i];
         float magnitude = distance * (distance * amplitude);
 
-        float pointIdentiy = (startPos.x * distance) * flipped;
-        Vector3 newPos = ((mousePosRelative * pointIdentiy) / magnitude) * flipped;
+        float pointIdentiy = (startPos.x * distance) * direction;
+        Vector3 newPos = ((mousePosRelative * pointIdentiy) / magnitude) * direction;
 
         float lerpTime = (selectAnimTime / pointIdentiy) * Time.deltaTime;
         Vector3 lerpPos = Vector3.Lerp(point.transform.localPosition, newPos, lerpTime);
@@ -90,6 +92,16 @@ public class Reticle : MonoBehaviour
         }
     }
 
+    private void FireProjectiles()
+    {
+        for (int i = 0; i < launchPoints.Count; i++)
+        {
+            launchPoints[i].GetComponent<ShootProjectile>().FireProjectile();
+        }
+        this.gameObject.SetActive(false);
+    }
+
+    private int count = 0;
     private IEnumerator LerpObject(GameObject item, Vector3 pos, float time)
     {
         Vector3 currentPos = item.transform.localPosition;
@@ -108,6 +120,11 @@ public class Reticle : MonoBehaviour
 
             yield return null;
             ratio = (elapsed / time);
+        }
+        count++;
+        if (count >= points.Count)
+        {
+            FireProjectiles();
         }
     }
 }
