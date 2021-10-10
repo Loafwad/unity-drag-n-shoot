@@ -10,7 +10,6 @@ public class ShootProjectile : MonoBehaviour
     {
         GameObject projectile = Instantiate(point, null);
         projectile.transform.position = this.transform.position;
-        projectile.transform.rotation = this.transform.rotation;
         projectile.GetComponent<Rigidbody2D>().AddRelativeForce(-this.transform.right * speed);
     }
 }

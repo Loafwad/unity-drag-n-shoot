@@ -45,6 +45,7 @@ public class Reticle : MonoBehaviour
         item.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    [SerializeField] private float minDistance;
     private void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
     {
         int direction = 0;
@@ -53,10 +54,11 @@ public class Reticle : MonoBehaviour
         else
             direction = 1;
 
+
         Vector3 startPos = pointStartPos[i];
         float magnitude = distance * (distance * amplitude);
-
         float pointIdentiy = (startPos.x * distance) * direction;
+
         Vector3 newPos = ((mousePosRelative * pointIdentiy) / magnitude) * direction;
 
         float lerpTime = (selectAnimTime / pointIdentiy) * Time.deltaTime;
@@ -64,8 +66,16 @@ public class Reticle : MonoBehaviour
         lerpPos.z = 0;
         point.transform.localPosition = lerpPos;
 
-    }
 
+        float scaledDistance = (distance - minDistance) / (10 - minDistance);
+        if (scaledDistance < minDistance)
+        {
+            Vector3 newExtPos = Vector3.Normalize(lerpPos) / (spacing * 2);
+            point.transform.localPosition = newExtPos * pointIdentiy;
+        }
+        Debug.Log(scaledDistance);
+    }
+    [SerializeField] float spacing;
     public void Selected(GameObject selected)
     {
         this.gameObject.SetActive(true);
