@@ -14,13 +14,15 @@ public class Reticle : MonoBehaviour
 
     [Header("Spring")]
     [SerializeField] private float stiffness;
+    [SerializeField] float clamp;
+
 
     [Header("Points")]
     [SerializeField] private List<GameObject> points = new List<GameObject>();
-
     [SerializeField] private List<GameObject> launchPoints = new List<GameObject>();
     private List<Vector3> pointStartPos = new List<Vector3>();
     private GameObject selectedObject;
+
 
     private void Awake()
     {
@@ -45,37 +47,32 @@ public class Reticle : MonoBehaviour
         item.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    [SerializeField] private float minDistance;
+
     private void HandlePoint(Vector3 mousePosRelative, float distance, int i, Point point)
     {
-        int direction = 0;
+        int dir = 0;
         if (point.flip)
-            direction = -1;
+            dir = -1;
         else
-            direction = 1;
-
+            dir = 1;
 
         Vector3 startPos = pointStartPos[i];
-        float magnitude = distance * (distance * amplitude);
-        float pointIdentiy = (startPos.x * distance) * direction;
 
-        Vector3 newPos = ((mousePosRelative * pointIdentiy) / magnitude) * direction;
+        float magnitude = (amplitude * distance) / distance;
+        float pointIdentity = (startPos.x * magnitude) * dir;
 
-        float lerpTime = (selectAnimTime / pointIdentiy) * Time.deltaTime;
-        Vector3 lerpPos = Vector3.Lerp(point.transform.localPosition, newPos, lerpTime);
+        Vector3 targetPos = (mousePosRelative * pointIdentity) * dir;
+
+        float lerpTime = (selectAnimTime / pointIdentity) * Time.deltaTime;
+        Vector3 lerpPos = Vector3.Lerp(point.transform.localPosition, targetPos, lerpTime);
+
         lerpPos.z = 0;
+        float pointDistance = Vector3.Distance(point.transform.position, this.transform.position);
+        lerpPos = Vector3.ClampMagnitude(lerpPos, (pointIdentity / magnitude) + (pointDistance / clamp));
+
         point.transform.localPosition = lerpPos;
-
-
-        float scaledDistance = (distance - minDistance) / (10 - minDistance);
-        if (scaledDistance < minDistance)
-        {
-            Vector3 newExtPos = Vector3.Normalize(lerpPos) / (spacing * 2);
-            point.transform.localPosition = newExtPos * pointIdentiy;
-        }
-        Debug.Log(scaledDistance);
     }
-    [SerializeField] float spacing;
+
     public void Selected(GameObject selected)
     {
         this.gameObject.SetActive(true);
@@ -87,7 +84,7 @@ public class Reticle : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
         {
             HandleRotation(points[i].gameObject);
-            float distance = Vector3.Distance(this.transform.position, mouseWorldPos);
+            float distance = Vector2.Distance(this.transform.position, mouseWorldPos);
             Point point = points[i].GetComponent<Point>();
             HandlePoint(mousePosRelative, distance, i, point);
         }
